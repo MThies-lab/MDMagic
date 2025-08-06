@@ -13,14 +13,14 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ---
 
 ### 📄 **Supported File Formats**
-|Document Type| Format |
+|Document Type | Format |
 |---------|----------------|
-- **Text Documents:** `.txt`, `.rtf`
-- **Microsoft Office:** `.docx`, `.doc`, `.xlsx`, `.xls`
-- **PDF Documents:** `.pdf` (with OCR support)
-- **Web Documents:** `.html`, `.htm`
-- **Images:** `.png`, `.jpg`, `.jpeg`, `.gif`, `.bmp`, `.tiff`, `.tif`
-- **OpenDocument:** `.odt`
+| **Text Documents** |  `.txt`, `.rtf`  | 
+| **Microsoft Office** | `.docx`, `.doc`, `.xlsx`, `.xls`  | 
+| **PDF Documents** |  `.pdf` (with OCR support) | 
+| **Web Documents:** |  `.html`, `.htm` | 
+| **Images:** |  `.png`, `.jpg`, `.jpeg`, `.gif`, `.bmp`, `.tiff`, `.tif` | 
+| **OpenDocument:** |  `.odt` | 
 
 
 ### ⚡ **Advanced Features**
