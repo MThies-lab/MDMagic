@@ -1,3 +1,4 @@
+
 # 🚀 Markdown Magic Installation Guide
 
 Transform any document into beautiful, structured Markdown with advanced batch processing, OCR capabilities, and intelligent format preservation.
