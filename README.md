@@ -18,9 +18,9 @@ Markdown Magic is a comprehensive local document conversion program that transfo
 
 ## 🔥 Key Capabilities
 
-Markdown Magic Transforms documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image image to generate a brief description of each image it scans, and is part of the image placeholder. 
+Markdown Magic Transforms documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is part of the image placeholder. 
 
-This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local and only has access to the folder the user designates to send the converted file to. 
+This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
 
 ### 📄 **Supported File Formats**
 - **Text Documents:** `.txt`, `.rtf`
