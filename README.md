@@ -45,7 +45,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
 |---------|----------------|----------------|
 | **Batch Processing** | ✅ Advanced batch with progress tracking | ❌ Single file only |
 | **OCR Support** | ✅ Multi-language OCR with Tesseract | ❌ No OCR capabilities |
-| ** AI Image Descriptions** | ✅ **AI-powered visual content analysis** | ❌ **No AI capabilities** |
+| ** AI Image Descriptions** | ✅ AI-powered visual content analysis | ❌ No AI capabilities |
 | **GUI Interface** | ✅ Full desktop interface | ❌ Command line only |
 | **Image Extraction** | ✅ Automatic image extraction/linking | ❌ Limited image support |
 | **Format Preservation** | ✅ Intelligent structure detection | ❌ Basic conversion |
@@ -106,7 +106,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
  |Library | Minimum Version (or Higher) | Description |
  |--------|-----------|--------------------------|
  | transformers | 4.35.0    | AI model framework | 
- | torch | 2.0.0 |            Deep learning library*|
+ | torch | 2.0.0 |            Deep learning library|
  | torchvision | 0.15.0        | Computer vision library |
 
 ### Development Dependencies
@@ -322,11 +322,13 @@ python3 markdown_magic_gui.py
 ### Test AI Installation
 
 1. Open terminal and run:
-   ```bash
+   
+```bash
 python3 test_ai_vision.py
 ```
 
-**Expected Output with AI Vision:**
+#### Expected Output with AI Vision:**
+
 ```
 ✅ AI Vision Processor: Available
 ✅ Enhanced Image Processor: Available  
@@ -334,7 +336,8 @@ python3 test_ai_vision.py
 🤖 AI Vision Models: ✅
 ```
 
-**If AI libraries are not installed:**
+#### AI libraries not installed:
+
 ```
 ❌ AI Vision components not available
 🔄 Falling back to basic OCR-only processing...
@@ -342,12 +345,14 @@ python3 test_ai_vision.py
 
 ### AI Processing Examples
 
-**Before (OCR Only):**
+#### Before (OCR Only):
+
 ```markdown
 ![Image (1), page 2, Image content:](images/image_1.jpg)
 ```
 
-**After (AI + OCR):**
+#### After (AI + OCR):
+
 ```markdown
 ![Image 1, page 2, a red sports car parked in front of a modern building, Text: "FERRARI 458"](images/image_1.jpg)
 ```
