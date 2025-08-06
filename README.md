@@ -2,9 +2,7 @@
 
 Transform any document into beautiful, structured Markdown with advanced batch processing, OCR capabilities, and intelligent format preservation.
 
-Markdown Magic converts documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features a desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is included in the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
-
-**🆕 NEW: AI-Enhanced Image Descriptions** - Your Markdown Magic now features AI-powered visual content analysis that goes beyond basic OCR to generate meaningful image descriptions!
+Markdown Magic converts documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features a desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, The Tesseract/BLIP AI functionality  "reads" images to generate a brief description of each image and includes it in the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
 
 **Note:** This project was created out of curiosity and necessity. If you find something that's broken, or could be better, please let me know! I built this either before the Markitdown MCP was live or before I knew about it. 
 
@@ -31,9 +29,9 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
  |------------------|-------------------------------------------|
  | Batch Processing |  Convert hundreds of files simultaneously | 
  | OCR Text Recognition |  Extract text from images and scanned PDFs | 
- | **🤖 AI Image Descriptions** |  **Generate meaningful visual content descriptions using AI** | 
+ |  AI Image Descriptions |  Generate visual content descriptions using AI | 
  | Multi-language OCR |  Support for 11+ languages including English, Spanish, French, German, Chinese, Japanese, Korean, Arabic | 
- | Smart Structure Detection:|  Automatically identify headings, lists, tables, and formatting | 
+ | Smart Structure Detection|  Automatically identify headings, lists, tables, and formatting | 
  | Image Extraction |  Save embedded images with proper linking | 
  | Format Preservation |  Maintain original document structure and styling | 
  | Progress Tracking |  Real-time conversion progress with detailed status | 
@@ -47,7 +45,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
 |---------|----------------|----------------|
 | **Batch Processing** | ✅ Advanced batch with progress tracking | ❌ Single file only |
 | **OCR Support** | ✅ Multi-language OCR with Tesseract | ❌ No OCR capabilities |
-| **🤖 AI Image Descriptions** | ✅ **AI-powered visual content analysis** | ❌ **No AI capabilities** |
+| ** AI Image Descriptions** | ✅ **AI-powered visual content analysis** | ❌ **No AI capabilities** |
 | **GUI Interface** | ✅ Full desktop interface | ❌ Command line only |
 | **Image Extraction** | ✅ Automatic image extraction/linking | ❌ Limited image support |
 | **Format Preservation** | ✅ Intelligent structure detection | ❌ Basic conversion |
@@ -107,9 +105,9 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
 #### **🤖 AI Vision Dependencies (Optional - Enhanced Features)**
  |Library | Minimum Version (or Higher) | Description |
  |--------|-----------|--------------------------|
- | transformers | 4.35.0    | **AI model framework** | 
- | torch | 2.0.0 |            **Deep learning library** |
- | torchvision | 0.15.0        | **Computer vision library** |
+ | transformers | 4.35.0    | AI model framework | 
+ | torch | 2.0.0 |            Deep learning library*|
+ | torchvision | 0.15.0        | Computer vision library |
 
 ### Development Dependencies
 |Library | Minimum Version (or Higher) | Description |
@@ -244,9 +242,7 @@ pip3 install -r requirements.txt
 
 ---
 
-## 🤖 AI Vision Setup (Optional Enhanced Features)
-
-### Install AI Dependencies
+###  AI Vision Setup 
 
 Use these commands to install the AI libraries for AI-assisted image description generation.
 
@@ -268,44 +264,23 @@ pip3 install transformers torch torchvision --index-url https://download.pytorch
 pip3 install transformers torch torchvision --index-url https://download.pytorch.org/whl/cu118
 ```
 
-### Test AI Installation
+### Use the command line to enable AI Vision
 
-1. Open terminal and run:
-   ```bash
-python3 test_ai_vision.py
+```python
+from document_converter import DocumentConverter
+
+# Basic conversion
+converter = DocumentConverter()
+result = converter.convert_to_markdown('my_document.pdf')
+
+# With AI features
+converter = DocumentConverter(enable_ai=True)
+result = converter.convert_to_markdown('document_with_images.pdf')
+
+# OCR only (faster)
+converter = DocumentConverter(enable_ai=False)
+result = converter.convert_to_markdown('text_document.pdf')
 ```
-
-**Expected Output with AI:**
-```
-✅ AI Vision Processor: Available
-✅ Enhanced Image Processor: Available  
-✅ AI-Enhanced Document Converter: Available
-🤖 AI Vision Models: ✅
-```
-
-**If AI libraries are not installed:**
-```
-❌ AI Vision components not available
-🔄 Falling back to basic OCR-only processing...
-```
-
-### AI Processing Examples
-
-**Before (OCR Only):**
-```markdown
-![Image (1), page 2, Image content:](images/image_1.jpg)
-```
-
-**After (AI + OCR):**
-```markdown
-![Image 1, page 2, a red sports car parked in front of a modern building, Text: "FERRARI 458"](images/image_1.jpg)
-```
-
-**How It Works:**
-1. **Text Detection (OCR):** Tesseract extracts any readable text
-2. **Visual Analysis (AI):** BLIP model generates image descriptions  
-3. **Smart Combination:** Creates intelligent alt-text combining both
-
 ---
 
 ## Test the Installation
@@ -339,29 +314,48 @@ python3 markdown_magic_gui.py
 5. Click **CONVERT**.
 6. When the system prompts you if you want open your output folder, click **Yes**.
 
-**For AI Testing:**
-- Try converting an image file (`.jpg`, `.png`)
-- The generated markdown will include AI-generated descriptions if AI is enabled
+### AI Vision Test:
+1. Convert a supported image file (`.jpg`, `.png`)
+2. Verify the generated markdown includes AI-generated descriptions.
 
----
 
-## Command Line Usage
+### Test AI Installation
 
-```python
-from document_converter import DocumentConverter
-
-# Basic conversion
-converter = DocumentConverter()
-result = converter.convert_to_markdown('my_document.pdf')
-
-# With AI features
-converter = DocumentConverter(enable_ai=True)
-result = converter.convert_to_markdown('document_with_images.pdf')
-
-# OCR only (faster)
-converter = DocumentConverter(enable_ai=False)
-result = converter.convert_to_markdown('text_document.pdf')
+1. Open terminal and run:
+   ```bash
+python3 test_ai_vision.py
 ```
+
+**Expected Output with AI Vision:**
+```
+✅ AI Vision Processor: Available
+✅ Enhanced Image Processor: Available  
+✅ AI-Enhanced Document Converter: Available
+🤖 AI Vision Models: ✅
+```
+
+**If AI libraries are not installed:**
+```
+❌ AI Vision components not available
+🔄 Falling back to basic OCR-only processing...
+```
+
+### AI Processing Examples
+
+**Before (OCR Only):**
+```markdown
+![Image (1), page 2, Image content:](images/image_1.jpg)
+```
+
+**After (AI + OCR):**
+```markdown
+![Image 1, page 2, a red sports car parked in front of a modern building, Text: "FERRARI 458"](images/image_1.jpg)
+```
+
+**How It Works:**
+1. **Text Detection (OCR):** Tesseract extracts any readable text.
+2. **Visual Analysis (AI):** BLIP model generates image descriptions.  
+3. **Smart Combination:** Creates intelligent alt-text combining both.
 
 ---
 
