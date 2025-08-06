@@ -20,8 +20,10 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 - **Web Documents:** `.html`, `.htm`
 - **Images:** `.png`, `.jpg`, `.jpeg`, `.gif`, `.bmp`, `.tiff`, `.tif`
 - **OpenDocument:** `.odt`
+|---------|----------------|
 
 ### ⚡ **Advanced Features**
+ |------------------|-------------------------------------------|
  | Batch Processing |  Convert hundreds of files simultaneously | 
  | OCR Text Recognition |  Extract text from images and scanned PDFs | 
  | Multi-language OCR |  Support for 11+ languages including English, Spanish, French, German, Chinese, Japanese, Korean, Arabic | 
@@ -54,16 +56,19 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ### 📋 System Requirements
 
 #### **Python Version**
+ |----------|-----------------------|
  | Required |  Python 3.8 or higher | 
  | Recommended | Python 3.9 - 3.12 | 
  | Tested |  Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 | 
 
 #### **Operating Systems**
+ |---------|------------------|
  | Windows |  10, 11 (64-bit) | 
  | macOS |  10.14+ (Mojave and newer) | 
  | Linux |  Ubuntu 18.04+, CentOS 7+, Debian 9+ | 
 
 ### **Hardware Requirements**
+ |-----|------------------------------|
  | RAM | 4GB minimum, 8GB recommended | 
  | Storage |  500MB free space | 
  | Processor |  Any modern CPU (OCR benefits from multi-core) | 
@@ -73,8 +78,8 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ### 📦 Required Python Libraries
 
 #### **Core Feature Dependencies**
-```
- | PyQt5>=5.15.0          |  # Desktop GUI framework | 
+ |-------------------------|--------------------------|
+ | PyQt5>=5.15.0           |  # Desktop GUI framework | 
  | Pillow>=8.0.0           |  # Image processing | 
  | pytesseract>=0.3.7      |  # OCR text recognition | 
  | PyMuPDF>=1.18.0         |  # PDF processing | 
@@ -82,14 +87,14 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
  | beautifulsoup4>=4.9.0   |  # HTML parsing | 
  | striprtf>=0.0.15        |  # RTF document processing | 
  | openpyxl>=3.0.5         |  # Excel file processing | 
- | lxml>=4.6.0            |   # XML processing | 
- | tqdm>=4.60.0           |   # Progress bars | 
-```
+ | lxml>=4.6.0             |   # XML processing | 
+ | tqdm>=4.60.0            |   # Progress bars | 
+
 
 ### **Development Dependencies**
-```
+ |-------------------------|-------------------------------------|
  | py2app>=0.28.0          |  # macOS app packaging (macOS only) | 
-```
+
 
 ---
 
@@ -99,7 +104,8 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 Verify Python installation:
 
- | **On Windows:**  | **On macOS:** | **On Linux:** | 
+ | **On Windows:**  | **On macOS:** | **On Linux:** |
+ |------------------|---------------|---------------|
  | 1. Press `Windows Key + R`  | 1. Press `Cmd + Space` | 1. Press `Ctrl + Alt + T` | 
  | 2. Type `cmd` and press Enter | 2. Type `terminal` and press Enter | 2. Type: `python3 --version` |
  | 3. In the terminal window that opens, type: `python --version` | 3. In the terminal window, type: `python3 --version` | 3. Press Enter | 
@@ -111,7 +117,8 @@ If the system displays an error, you must install Python.
 
 ### **Install Python **
 
-**Windows:** | **macOS:** |
+|**Windows:** | **macOS:** |
+|-------------|------------|
 1. Go to https://python.org/downloads | 1. Go to https://python.org/downloads | 
 2. Click "Download Python" (latest version) | 2. Download the latest Python version | 
 3. Run the downloaded file | 3. Run the installer and follow prompts
@@ -171,6 +178,7 @@ cd Markdown-Magic
 ### **Open Terminal/Command Prompt in Project Folder**
 
 | **Windows:** | **macOS:** | **Linux:** | 
+|--------------|------------|------------|
 1. Open File Explorer | 1. Open Finder | 1. Open your file manager | 
 2. Navigate to your Markdown-Magic folder | 2. Navigate to your Markdown-Magic folder | 2. Navigate to the Markdown-Magic folder | 
 3. Hold `Shift` and right-click in the folder | 3. Right-click the folder | 3. Right-click and select "Open in Terminal" | 
