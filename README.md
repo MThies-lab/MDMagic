@@ -13,6 +13,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ---
 
 ### 📄 **Supported File Formats**
+|Document Type| Format |
 |---------|----------------|
 - **Text Documents:** `.txt`, `.rtf`
 - **Microsoft Office:** `.docx`, `.doc`, `.xlsx`, `.xls`
@@ -20,9 +21,10 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 - **Web Documents:** `.html`, `.htm`
 - **Images:** `.png`, `.jpg`, `.jpeg`, `.gif`, `.bmp`, `.tiff`, `.tif`
 - **OpenDocument:** `.odt`
-|---------|----------------|
+
 
 ### ⚡ **Advanced Features**
+ |Feature | Description |
  |------------------|-------------------------------------------|
  | Batch Processing |  Convert hundreds of files simultaneously | 
  | OCR Text Recognition |  Extract text from images and scanned PDFs | 
@@ -109,7 +111,7 @@ Verify Python installation:
  | 1. Press `Windows Key + R`  | 1. Press `Cmd + Space` | 1. Press `Ctrl + Alt + T` | 
  | 2. Type `cmd` and press Enter | 2. Type `terminal` and press Enter | 2. Type: `python3 --version` |
  | 3. In the terminal window that opens, type: `python --version` | 3. In the terminal window, type: `python3 --version` | 3. Press Enter | 
- | 4. Press Enter | 4. Press Enter | |
+ | 4. Press Enter | 4. Press Enter |  |
 
 If the system displays an error, you must install Python.
 
@@ -119,11 +121,11 @@ If the system displays an error, you must install Python.
 
 |**Windows:** | **macOS:** |
 |-------------|------------|
-1. Go to https://python.org/downloads | 1. Go to https://python.org/downloads | 
-2. Click "Download Python" (latest version) | 2. Download the latest Python version | 
-3. Run the downloaded file | 3. Run the installer and follow prompts
-4. ⚠️ **IMPORTANT:** Check "Add Python to PATH" during installation |  |  
-5. Click "Install Now" |  |
+| 1. Go to https://python.org/downloads | 1. Go to https://python.org/downloads | 
+| 2. Click "Download Python" (latest version) | 2. Download the latest Python version | 
+| 3. Run the downloaded file | 3. Run the installer and follow prompts | 
+| 4. **IMPORTANT:** Check "Add Python to PATH" during installation |  
+| 5. Click "Install Now" | 
 
  **Linux (Ubuntu/Debian):** 
 Run this command:
