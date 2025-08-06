@@ -175,7 +175,7 @@ sudo apt install tesseract-ocr
 3. Click **Download ZIP**.
 4. Select a destination folder for the ZIP file. 
 
-**Option B: Use Git (Advanced)**
+**Option B: Use Git**
 1. Navigate to your terminal and run:
 ```bash
 git clone https://github.com/MThies-lab/Markdown-Magic.git
@@ -191,7 +191,7 @@ cd Markdown-Magic
 | 1. Open `File Explorer`. | 1. Open `Finder`. | 1. Open your file manager. | 
 | 2. Navigate to the Markdown-Magic folder. | 2. Navigate to your Markdown-Magic folder. | 2. Navigate to the Markdown-Magic folder. | 
 | 3. Hold `Shift` and right-click the folder. | 3. Right-click the folder. | 3. Right-click and select **Open in Terminal**. | 
-| 4. Select **Open PowerShell window here** or **Open command window here** | 4. Select **Services** → *New Terminal at Folder**. |--| 
+| 4. Select **Open PowerShell window here** or **Open command window here** | 4. Select **Services** → **New Terminal at Folder**. |--| 
 
 ---
 
