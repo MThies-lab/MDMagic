@@ -102,7 +102,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
  | lxml | 4.6.0             |   XML processing | 
  | tqdm | 4.60.0            |   Progress bars | 
 
-#### **🤖 AI Vision Dependencies (Optional - Enhanced Features)**
+#### **AI Vision Dependencies (Optional - Enhanced Features)**
  |Library | Minimum Version (or Higher) | Description |
  |--------|-----------|--------------------------|
  | transformers | 4.35.0    | AI model framework | 
