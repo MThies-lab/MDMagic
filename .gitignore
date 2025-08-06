@@ -1,4 +1,6 @@
-#Ignore dist Folder
+#Ignore 
+dist 
 
-#Ignore flask_web_app.py
+#Ignore 
+flask_web_app.py
 
