@@ -53,24 +53,28 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 | **Settings Control** | ✅ Granular conversion settings | ❌ Limited customization |
 
 ---
-##Prerequisites
+
+## Prerequisites
 
 ### 📋 System Requirements
 
 #### **Python Version**
  |----------|-----------------------|
+ | Requirement/Status | Version |
  | Required |  Python 3.8 or higher | 
  | Recommended | Python 3.9 - 3.12 | 
  | Tested |  Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 | 
 
 #### **Operating Systems**
  |---------|------------------|
+ | OS | Version |
  | Windows |  10, 11 (64-bit) | 
  | macOS |  10.14+ (Mojave and newer) | 
  | Linux |  Ubuntu 18.04+, CentOS 7+, Debian 9+ | 
 
 ### **Hardware Requirements**
  |-----|------------------------------|
+ | Component | Requirement |
  | RAM | 4GB minimum, 8GB recommended | 
  | Storage |  500MB free space | 
  | Processor |  Any modern CPU (OCR benefits from multi-core) | 
