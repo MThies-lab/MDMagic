@@ -3,7 +3,7 @@
 
 Transform any document into beautiful, structured Markdown with advanced batch processing, OCR capabilities, and intelligent format preservation.
 
-Markdown Magic Transforms documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is part of the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
+Markdown Magic transforms documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features a desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is included in the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
 
 **Note:** This project was created out of curiosity and necessity. If you find something that's broken, or could be better, please let me know! I built this either before the Markitdown MCP was live or before I knew about it. 
 
@@ -13,7 +13,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 ---
 
-### 📄 **Supported File Formats**
+###  **Supported File Formats**
 |Document Type | Format |
 |---------|----------------|
 | **Text Documents** |  `.txt`, `.rtf`  | 
@@ -24,7 +24,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 | **OpenDocument:** |  `.odt` | 
 
 
-### ⚡ **Advanced Features**
+###  **Advanced Features**
  |Feature | Description |
  |------------------|-------------------------------------------|
  | Batch Processing |  Convert hundreds of files simultaneously | 
@@ -57,7 +57,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 ## Prerequisites
 
-### 📋 System Requirements
+###  System Requirements
 
 #### **Python Version**
  | Requirement/Status | Version |
@@ -82,7 +82,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 ---
 
-### 📦 Required Python Libraries
+###  Required Python Libraries
 
 #### **Core Feature Dependencies**
  |Library | Minimum Version | Description |
@@ -107,18 +107,18 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 ---
 
-## 🛠️ Installation Guide
+##  Installation Guide
 
 ### Verify Python Installation
 
-Verify Python installation:
+Use these instructions to verify Python your respective OS:
 
  | **On Windows:**  | **On macOS:** | **On Linux:** |
  |------------------|---------------|---------------|
- | 1. Press `Windows Key + R`  | 1. Press `Cmd + Space` | 1. Press `Ctrl + Alt + T` | 
- | 2. Type `cmd` and press Enter | 2. Type `terminal` and press Enter | 2. Type: `python3 --version` |
- | 3. In the terminal window that opens, type: `python --version` | 3. In the terminal window, type: `python3 --version` | 3. Press Enter | 
- | 4. Press Enter | 4. Press Enter |--|
+ | 1. Press `Windows Key + R` . | 1. Press `Cmd + Space`. | 1. Press `Ctrl + Alt + T`. | 
+ | 2. Type `cmd` and press `Enter`. | 2. Type `terminal` and press `Enter`. | 2. Type: `python3 --version`. |
+ | 3. In the terminal window that opens, type: `python --version`. | 3. In the terminal window, type: `python3 --version`. | 3. Press `Enter`. | 
+ | 4. Press `Enter`. | 4. Press `Enter`. |--|
 
 If the system displays an error, you must install Python.
 
@@ -128,11 +128,11 @@ If the system displays an error, you must install Python.
 
 |**Windows:** | **macOS:** |
 |-------------|------------|
-| 1. Go to https://python.org/downloads | 1. Go to https://python.org/downloads | 
-| 2. Click "Download Python" (latest version) | 2. Download the latest Python version | 
-| 3. Run the downloaded file | 3. Run the installer and follow prompts | 
-| 4. **IMPORTANT:** Check "Add Python to PATH" during installation |--|
-| 5. Click "Install Now" |--|
+| 1. Go to `https://python.org/downloads`. | 1. Go to `https://python.org/downloads`. | 
+| 2. Click **Download Pytho** (latest version). | 2. Download the latest Python version. | 
+| 3. Run the downloaded file. | 3. Run the installer and follow prompts. | 
+| 4. **IMPORTANT:** Select **Add Python to PATH** on the install wizard screen. |--|
+| 5. Click *Install Now**. |--|
 
  **Linux (Ubuntu/Debian):** 
 Run this command:
@@ -146,7 +146,7 @@ sudo apt install python3 python3-pip
 ### **Install Tesseract OCR (For Text Recognition)**
 
 **Windows:**
-1. Navigate to https://github.com/UB-Mannheim/tesseract/wiki
+1. Navigate to `https://github.com/UB-Mannheim/tesseract/wiki`.
 2. Download `Tesseract`.
 3. Open your download folder and run the installer file.
 4. Save the installation path in text file for reference (usually `C:\Program Files\Tesseract-OCR\`).
@@ -170,10 +170,10 @@ sudo apt install tesseract-ocr
 ### **Download Markdown Magic**
 
 **Option A: Download ZIP**
-1. Navigate to: https://github.com/MThies-lab/Markdown-Magic
+1. Navigate to: `https://github.com/MThies-lab/Markdown-Magic`.
 2. Click the green **Code** button.
 3. Click **Download ZIP**.
-4. Select the destination to send and extract the ZIP file. 
+4. Select a destination folder for the ZIP file. 
 
 **Option B: Use Git (Advanced)**
 1. Navigate to your terminal and run:
@@ -188,10 +188,10 @@ cd Markdown-Magic
 
 | **Windows:** | **macOS:** | **Linux:** | 
 |--------------|------------|------------|
-| 1. Open File Explorer | 1. Open Finder | 1. Open your file manager | 
-| 2. Navigate to your Markdown-Magic folder | 2. Navigate to your Markdown-Magic folder | 2. Navigate to the Markdown-Magic folder | 
-| 3. Hold `Shift` and right-click in the folder | 3. Right-click the folder | 3. Right-click and select "Open in Terminal" | 
-| 4. Select "Open PowerShell window here" or "Open command window here" | 4. Select "Services" → "New Terminal at Folder" |--| 
+| 1. Open `File Explorer`. | 1. Open `Finder`. | 1. Open your file manager. | 
+| 2. Navigate to the Markdown-Magic folder. | 2. Navigate to your Markdown-Magic folder. | 2. Navigate to the Markdown-Magic folder. | 
+| 3. Hold `Shift` and right-click the folder. | 3. Right-click the folder. | 3. Right-click and select **Open in Terminal**. | 
+| 4. Select **Open PowerShell window here** or **Open command window here** | 4. Select **Services** → *New Terminal at Folder**. |--| 
 
 ---
 
@@ -216,7 +216,7 @@ If successful, the terminal displays `(markdown_magic_env)` at the beginning of 
 
 ---
 
-### Install Required Libraries**
+### Install Required Libraries
 
 Run this command for your respective OS. This may take a few minutes to install.
 
@@ -235,7 +235,7 @@ pip3 install -r requirements.txt
 
 ## Test the Installation
 
-###Run the desktop application
+### Run the desktop application
 
 There are multiple ways to launch Markdown Magic. If successful, the system displays a retro, nostalgic black screen with green fonts and outlines.
 
@@ -254,10 +254,10 @@ python3 markdown_magic_gui.py
 
 ---
 
-### **Test a Sample File**
+### Test a Sample File
 
 1. Create or select a document file. I recommend using a .pdf or .docx.
-    a. This will show you immediately if it's working correctly, in comparison to a .txt file that doesn't have much, if any measurable formatting.
+    a. This shows you immediately if it's working correctly, in comparison to a .txt file that doesn't have much, if any measurable formatting.
 2. In Markdown Magic, click **ADD FILES** or Drag and Drop into the file window. 
 7. Click **OUTPUT FOLDER**
 8. Select a folder destination for the converted file.
