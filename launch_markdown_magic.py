@@ -24,8 +24,8 @@ try:
     print("✓ PyQt5 found")
 except ImportError:
     print("✗ PyQt5 not found")
-    print("Install with: pip install PyQt5")
-    print("\nRun this command to install: pip install PyQt5")
+    print("Install with: pip3 install PyQt5")
+    print("\nRun this command to install: pip3 install PyQt5")
     time.sleep(5)  # Give user time to read message if double-clicking
     sys.exit(1)
 

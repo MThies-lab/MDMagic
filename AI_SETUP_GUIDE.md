@@ -53,7 +53,7 @@ python test_ai_vision.py
 
 ### **Step 3: Use AI-Enhanced Features**
 
-```python
+```python3
 from document_converter import DocumentConverter
 
 # Enable AI features (default)

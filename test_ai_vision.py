@@ -58,7 +58,7 @@ def test_ai_vision_capabilities():
     except ImportError as e:
         print(f"❌ AI Vision components not available: {e}")
         print("\n📋 To enable AI vision capabilities, install:")
-        print("   pip install transformers torch torchvision")
+        print("   pip3 install transformers torch torchvision")
         print("\n🔄 Falling back to basic OCR-only processing...")
         return False
 
@@ -152,6 +152,6 @@ if __name__ == "__main__":
     
     print("\n🎉 Testing complete!")
     print("\nNext steps:")
-    print("1. Install AI dependencies: pip install transformers torch")
+    print("1. Install AI dependencies: pip3 install transformers torch")
     print("2. Test with your own images")
     print("3. Enable AI features in your applications")

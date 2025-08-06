@@ -10,7 +10,7 @@ features:
 
 # test_image
 
-![Image 1, from test_image.png, a black and white photo with the words hello, hello and hello, Text: Hello, this is a test image for OCR\!](test_image_images/image_1.png)
+![Image 1, from test_image.png, a black and white photo with the words hello, hello and hello, Text: Hello, this is a test image for OCR\!](standalone_test_images/image_1.png)
 
 ## AI Description
 

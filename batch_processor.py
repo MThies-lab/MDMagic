@@ -30,7 +30,10 @@ class BatchProcessor:
             max_batch_size_mb: Maximum total file size for a batch in MB
         """
         self.max_batch_size_mb = max_batch_size_mb
-        self.supported_extensions = {'.txt', '.pdf', '.docx', '.odt', '.rtf', '.html', '.htm', '.xlsx', '.xls'}
+        self.supported_extensions = {
+            '.txt', '.pdf', '.docx', '.odt', '.rtf', '.html', '.htm', '.xlsx', '.xls',
+            '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.tif'
+        }
     
     def validate_batch(self, file_paths: List[str]) -> Tuple[List[str], List[Tuple[str, str]], float]:
         """
@@ -128,18 +131,27 @@ class BatchProcessor:
                     output_path = os.path.join(output_folder, output_filename)
                     counter += 1
                 
-                # Call progress callback if provided
+                # Call progress callback for file start if provided  
                 if progress_callback:
-                    progress_callback(i + 1, total_files, file_path)
+                    progress_callback(i + 1, total_files, file_path, "starting")
                 
                 # Convert the file
+                if progress_callback:
+                    progress_callback(i + 1, total_files, file_path, "converting")
+                
                 result_path = converter.convert_to_markdown(file_path, output_path)
                 successful_files.append(result_path)
+                
+                # Report completion
+                if progress_callback:
+                    progress_callback(i + 1, total_files, file_path, "completed")
                 
                 print(f"✓ Converted: {input_file.name} → {Path(result_path).name}")
                 
             except Exception as e:
                 failed_files.append((file_path, str(e)))
+                if progress_callback:
+                    progress_callback(i + 1, total_files, file_path, "failed") 
                 print(f"✗ Failed: {Path(file_path).name} - {e}")
         
         return BatchResult(

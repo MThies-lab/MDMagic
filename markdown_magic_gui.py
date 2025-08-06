@@ -15,13 +15,13 @@ try:
     from PyQt5.QtWidgets import (
         QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
         QLabel, QPushButton, QProgressBar, QFileDialog,
-        QListWidget, QListWidgetItem, QMessageBox, QStatusBar
+        QListWidget, QListWidgetItem, QMessageBox, QStatusBar, QCheckBox
     )
     from PyQt5.QtCore import Qt, QThread, pyqtSignal
     from PyQt5.QtGui import QFont, QIcon
     PYQT_AVAILABLE = True
 except ImportError:
-    print("PyQt5 not installed. Run: pip install PyQt5")
+    print("PyQt5 not installed. Run: pip3 install PyQt5")
     PYQT_AVAILABLE = False
 
 # Import local components - gracefully handle if not available
@@ -65,17 +65,39 @@ class ConversionWorker(QThread):
             if BATCH_PROCESSOR_AVAILABLE and CONVERTER_AVAILABLE:
                 self.status_update.emit(f"CONVERTING {len(self.files_to_convert)} FILES...")
                 
-                # Initialize converter
-                converter = DocumentConverter(self.tesseract_path)
+                # Initialize converter with AI enabled
+                converter = DocumentConverter(self.tesseract_path, enable_ai=True)
                 
                 # Initialize batch processor
                 batch_processor = BatchProcessor()
                 
                 # Define progress callback for batch processor
-                def progress_callback(current, total, current_file):
-                    progress = int((current / total) * 100)
+                def progress_callback(current, total, current_file, stage="converting"):
+                    # Calculate more granular progress based on stage
+                    base_progress = ((current - 1) / total) * 100
+                    stage_progress = 0
+                    
+                    if stage == "starting":
+                        stage_progress = 0
+                        status_msg = f"STARTING {current}/{total}: {os.path.basename(current_file)}"
+                    elif stage == "converting": 
+                        stage_progress = 25  # 25% into current file
+                        status_msg = f"PROCESSING {current}/{total}: {os.path.basename(current_file)}"
+                    elif stage == "completed":
+                        stage_progress = 100 / total  # Full file progress
+                        status_msg = f"COMPLETED {current}/{total}: {os.path.basename(current_file)}"
+                    elif stage == "failed":
+                        stage_progress = 100 / total
+                        status_msg = f"FAILED {current}/{total}: {os.path.basename(current_file)}"
+                    else:
+                        stage_progress = 50
+                        status_msg = f"PROCESSING {current}/{total}: {os.path.basename(current_file)}"
+                    
+                    progress = int(base_progress + stage_progress)
+                    progress = min(progress, 100)  # Cap at 100%
+                    
                     self.progress_update.emit(progress)
-                    self.status_update.emit(f"CONVERTING {current}/{total}: {os.path.basename(current_file)}")
+                    self.status_update.emit(status_msg)
                 
                 # Process the batch
                 result = batch_processor.process_batch(
@@ -119,12 +141,19 @@ class ConversionWorker(QThread):
                         break
                     
                     try:
-                        # Update progress
+                        # Update progress with more detail
+                        filename = os.path.basename(file_path)
+                        
+                        # Starting file
                         progress = int((i / total_files) * 100)
                         self.progress_update.emit(progress)
+                        self.status_update.emit(f"STARTING {i+1}/{total_files}: {filename}")
                         
-                        filename = os.path.basename(file_path)
-                        self.status_update.emit(f"CONVERTING {filename}...")
+                        # Processing file
+                        progress = int((i / total_files) * 100 + 25)  # Add 25% for processing
+                        progress = min(progress, 100)
+                        self.progress_update.emit(progress)
+                        self.status_update.emit(f"PROCESSING {i+1}/{total_files}: {filename}")
                         
                         # Basic conversion - create markdown file
                         base_name = os.path.splitext(filename)[0]
@@ -132,6 +161,11 @@ class ConversionWorker(QThread):
                         
                         # Simple text extraction
                         self.simple_convert_file(file_path, output_file)
+                        
+                        # Completion progress
+                        progress = int(((i + 1) / total_files) * 100)
+                        self.progress_update.emit(progress)
+                        self.status_update.emit(f"COMPLETED {i+1}/{total_files}: {filename}")
                         
                         successful_conversions += 1
                         self.file_completed.emit(filename, True, "BASIC CONVERSION SUCCESSFUL")
@@ -194,10 +228,27 @@ class ConversionWorker(QThread):
                     except:
                         f.write("*Could not read HTML file content*\n")
                 
+                elif file_ext in ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.tif']:
+                    # Handle image files with AI processing
+                    try:
+                        from ai_vision_processor import AIVisionProcessor
+                        processor = AIVisionProcessor(enable_ai=True)
+                        # Process the image file directly, overwriting our basic output
+                        result = processor.process_image_file(input_file, output_file)
+                        return  # Skip the rest since AI processor handled everything
+                    except ImportError:
+                        f.write(f"*Image file: {filename}*\n\n")
+                        f.write(f"![{filename}]({input_file})\n\n")
+                        f.write("Note: For AI-powered image descriptions and OCR, install AI dependencies:\n")
+                        f.write("```\npip3 install transformers torch\n```\n\n")
+                    except Exception as e:
+                        f.write(f"*Image processing failed: {e}*\n\n")
+                        f.write(f"![{filename}]({input_file})\n\n")
+                
                 else:
                     # For other file types, create a placeholder
                     f.write(f"*File converted from {file_ext.upper()} format*\n\n")
-                    f.write("Note: This is a basic conversion. For full functionality with image processing and OCR, ")
+                    f.write("Note: This is a basic conversion. For full functionality with advanced processing, ")
                     f.write("please ensure all converter modules are installed.\n\n")
                     
                     try:
@@ -455,6 +506,13 @@ class MarkdownMagicWindow(QMainWindow):
         self.file_list.setMinimumHeight(200)
         self.file_list.setObjectName("drag_drop_area")
         main_layout.addWidget(self.file_list)
+        
+        # AI Vision toggle
+        self.ai_vision_checkbox = QCheckBox("Enable AI Vision (slower but detailed image descriptions)")
+        self.ai_vision_checkbox.setChecked(True)  # Default enabled
+        self.ai_vision_checkbox.setFont(QFont("Courier New", 11))
+        self.ai_vision_checkbox.setObjectName("ai_checkbox")
+        main_layout.addWidget(self.ai_vision_checkbox)
         
         # Buttons Row 2: Clear Files, Convert
         buttons2_layout = QHBoxLayout()
@@ -879,7 +937,7 @@ def main():
     
     # Check if PyQt is available
     if not PYQT_AVAILABLE:
-        print("ERROR: PyQt5 is not installed. Please install PyQt5 with: pip install PyQt5")
+        print("ERROR: PyQt5 is not installed. Please install PyQt5 with: pip3 install PyQt5")
         return 1
     
     # Check for components

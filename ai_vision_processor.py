@@ -7,6 +7,7 @@ Combines OCR with AI-powered image description generation
 import os
 import io
 import warnings
+import hashlib
 from pathlib import Path
 
 # Suppress transformer warnings
@@ -36,7 +37,7 @@ try:
 except ImportError:
     AI_VISION_AVAILABLE = False
     print("Note: transformers not installed. Install for AI image descriptions:")
-    print("  pip install transformers torch")
+    print("  pip3 install transformers torch")
 
 class AIVisionProcessor:
     """Enhanced image processor with AI-powered description generation"""
@@ -54,6 +55,10 @@ class AIVisionProcessor:
         self.pil_available = PIL_AVAILABLE
         self.ai_vision_available = AI_VISION_AVAILABLE and enable_ai
         self.current_output_dir = None
+        
+        # Image deduplication system
+        self.image_hashes = {}  # hash -> (filename, alt_text, ai_description, ocr_text)
+        self.image_counter = 0  # Track unique images only
         
         # Initialize Tesseract
         if tesseract_path and TESSERACT_AVAILABLE:
@@ -108,6 +113,9 @@ class AIVisionProcessor:
         output_dir = os.path.dirname(output_file)
         self.current_output_dir = output_dir
         
+        # Reset image cache for new document
+        self.reset_image_cache()
+        
         base_filename = os.path.splitext(os.path.basename(output_file))[0]
         image_folder_name = f"{base_filename}_images"
         image_folder_path = os.path.join(output_dir, image_folder_name)
@@ -118,18 +126,47 @@ class AIVisionProcessor:
         
         return image_folder_name
     
+    def reset_image_cache(self):
+        """Reset the image deduplication cache for a new document"""
+        self.image_hashes = {}
+        self.image_counter = 0
+        print("✓ Image deduplication cache reset")
+    
     def process_image(self, image_bytes, image_number, images_folder, position_info='', 
                      existing_alt='', existing_caption='', original_format='png'):
-        """Process an image with AI-powered description generation"""
+        """Process an image with AI-powered description generation and deduplication"""
         try:
             if not self.pil_available:
                 raise ImportError("PIL/Pillow not installed - cannot process images")
             
+            # Calculate image hash for deduplication
+            image_hash = self._calculate_image_hash(image_bytes)
+            
+            # Check if we've seen this image before
+            if image_hash and image_hash in self.image_hashes:
+                # Reuse existing image data
+                cached_data = self.image_hashes[image_hash]
+                cached_filename, cached_alt_text, cached_ai_desc, cached_ocr_text = cached_data
+                
+                print(f"✓ Duplicate image detected, reusing: {cached_filename}")
+                
+                # Update alt text with new position info but keep AI description
+                updated_alt_text = self._update_alt_text_for_duplicate(
+                    cached_alt_text, image_number, position_info
+                )
+                
+                # Create markdown placeholder with cached filename
+                return f"![{updated_alt_text}]({images_folder}/{cached_filename})"
+            
+            # New unique image - process normally
+            self.image_counter += 1
+            unique_number = self.image_counter
+            
             # Open image
             image = Image.open(io.BytesIO(image_bytes))
             
-            # Generate filename
-            image_filename = f"image_{image_number}.{original_format.lower()}"
+            # Generate filename for unique image
+            image_filename = f"image_{unique_number}.{original_format.lower()}"
             
             # Save image
             if self.current_output_dir is None:
@@ -142,12 +179,20 @@ class AIVisionProcessor:
             image_path = os.path.join(image_folder_path, image_filename)
             with open(image_path, 'wb') as f:
                 f.write(image_bytes)
-            print(f"✓ Saved image: {image_path}")
+            print(f"✓ Saved new unique image: {image_path}")
             
-            # Generate smart alt text
+            # Generate smart alt text and extract components for caching
             alt_text = self._generate_smart_alt_text(
                 image, image_number, position_info, existing_alt, existing_caption
             )
+            
+            # Extract AI description and OCR for caching
+            ocr_text = self._extract_text_with_ocr(image)
+            ai_description = self._generate_ai_description(image)
+            
+            # Cache the image data for future duplicates
+            if image_hash:
+                self.image_hashes[image_hash] = (image_filename, alt_text, ai_description, ocr_text)
             
             # Create markdown placeholder
             markdown_placeholder = f"![{alt_text}]({images_folder}/{image_filename})"
@@ -233,9 +278,17 @@ class AIVisionProcessor:
             device = next(self.ai_model.parameters()).device
             inputs = {k: v.to(device) for k, v in inputs.items()}
             
-            # Generate description
+            # Generate description with improved parameters
             with torch.no_grad():
-                out = self.ai_model.generate(**inputs, max_length=50, num_beams=5)
+                out = self.ai_model.generate(
+                    **inputs, 
+                    max_length=50, 
+                    min_length=5,
+                    num_beams=5,
+                    no_repeat_ngram_size=2,  # Prevent repetitive n-grams
+                    early_stopping=True,
+                    do_sample=False  # Use beam search for consistency
+                )
             
             description = self.ai_processor.decode(out[0], skip_special_tokens=True)
             
@@ -263,17 +316,56 @@ class AIVisionProcessor:
         # Prioritize descriptions
         if ocr_text and ai_description:
             # Both available - combine them
-            return f"{prefix}, {ai_description}, Text: {ocr_text}"
+            return f"{prefix}, This image displays {ai_description}, Text: {ocr_text}"
         elif ocr_text:
             # Only OCR text available
             return f"{prefix}, Text content: {ocr_text}"
         elif ai_description:
             # Only AI description available
-            return f"{prefix}, {ai_description}"
+            return f"{prefix}, This image displays {ai_description}"
         else:
             # Neither available - generic description
             return f"{prefix}, Visual content"
     
+    def _calculate_image_hash(self, image_bytes):
+        """Calculate a perceptual hash for duplicate detection"""
+        try:
+            # Create a simple hash based on image content
+            # This catches exact duplicates
+            content_hash = hashlib.md5(image_bytes).hexdigest()
+            
+            # For more sophisticated duplicate detection, we could use perceptual hashing
+            # but MD5 of content works well for exact duplicates (icons, logos, etc.)
+            return content_hash
+            
+        except Exception as e:
+            print(f"Warning: Could not calculate image hash: {e}")
+            return None
+
+    def _update_alt_text_for_duplicate(self, original_alt_text, new_image_number, new_position_info):
+        """Update alt text for duplicate image with new position info"""
+        try:
+            # Parse original alt text to extract AI description
+            if "This image displays" in original_alt_text:
+                # Extract the AI description part
+                parts = original_alt_text.split("This image displays", 1)
+                if len(parts) > 1:
+                    ai_desc_part = parts[1].split(", Text:")[0]  # Remove OCR text if present
+                    
+                    # Create new alt text with updated position
+                    prefix = f"Image {new_image_number}"
+                    if new_position_info:
+                        prefix += f", {new_position_info}"
+                    
+                    return f"{prefix}, This image displays{ai_desc_part}"
+            
+            # Fallback: just update the image number
+            return original_alt_text.replace("Image 1", f"Image {new_image_number}")
+            
+        except Exception as e:
+            print(f"Warning: Could not update alt text for duplicate: {e}")
+            return original_alt_text
+
     def _enhance_image_for_ocr(self, image):
         """Enhance image for better OCR results"""
         if not self.pil_available:
@@ -370,7 +462,7 @@ class AIVisionProcessor:
                 # AI Description
                 if ai_description:
                     f.write("## AI Description\n\n")
-                    f.write(f"**Visual Content:** {ai_description}\n\n")
+                    f.write(f"**Visual Content:** This image displays {ai_description}\n\n")
                 
                 # OCR Results
                 if ocr_text:

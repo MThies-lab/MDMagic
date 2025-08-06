@@ -16,7 +16,7 @@ try:
 except ImportError:
     PIL_AVAILABLE = False
     print("Warning: PIL/Pillow not installed. Image processing will be limited.")
-    print("Install with: pip install Pillow")
+    print("Install with: pip3 install Pillow")
 
 try:
     import pytesseract
@@ -24,7 +24,7 @@ try:
 except ImportError:
     TESSERACT_AVAILABLE = False
     print("Warning: pytesseract not installed. OCR will be disabled.")
-    print("Install with: pip install pytesseract")
+    print("Install with: pip3 install pytesseract")
 
 # Try to import AI vision processor
 try:
