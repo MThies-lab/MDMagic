@@ -60,22 +60,22 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ### 📋 System Requirements
 
 #### **Python Version**
- |----------|-----------------------|
  | Requirement/Status | Version |
+ |----------|-----------------------|
  | Required |  Python 3.8 or higher | 
  | Recommended | Python 3.9 - 3.12 | 
  | Tested |  Python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 | 
 
 #### **Operating Systems**
+| OS | Version |
  |---------|------------------|
- | OS | Version |
  | Windows |  10, 11 (64-bit) | 
  | macOS |  10.14+ (Mojave and newer) | 
  | Linux |  Ubuntu 18.04+, CentOS 7+, Debian 9+ | 
 
 ### **Hardware Requirements**
+| Component | Requirement |
  |-----|------------------------------|
- | Component | Requirement |
  | RAM | 4GB minimum, 8GB recommended | 
  | Storage |  500MB free space | 
  | Processor |  Any modern CPU (OCR benefits from multi-core) | 
@@ -85,6 +85,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ### 📦 Required Python Libraries
 
 #### **Core Feature Dependencies**
+ |Library | Description |
  |-------------------------|--------------------------|
  | PyQt5>=5.15.0           |  # Desktop GUI framework | 
  | Pillow>=8.0.0           |  # Image processing | 
@@ -107,7 +108,7 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 
 ## 🛠️ Installation Guide
 
-### **Verify Python Installation**
+### Verify Python Installation
 
 Verify Python installation:
 
@@ -116,21 +117,21 @@ Verify Python installation:
  | 1. Press `Windows Key + R`  | 1. Press `Cmd + Space` | 1. Press `Ctrl + Alt + T` | 
  | 2. Type `cmd` and press Enter | 2. Type `terminal` and press Enter | 2. Type: `python3 --version` |
  | 3. In the terminal window that opens, type: `python --version` | 3. In the terminal window, type: `python3 --version` | 3. Press Enter | 
- | 4. Press Enter | 4. Press Enter |  |
+ | 4. Press Enter | 4. Press Enter |--|
 
 If the system displays an error, you must install Python.
 
 ---
 
-### **Install Python **
+### Install Python 
 
 |**Windows:** | **macOS:** |
 |-------------|------------|
 | 1. Go to https://python.org/downloads | 1. Go to https://python.org/downloads | 
 | 2. Click "Download Python" (latest version) | 2. Download the latest Python version | 
 | 3. Run the downloaded file | 3. Run the installer and follow prompts | 
-| 4. **IMPORTANT:** Check "Add Python to PATH" during installation |  
-| 5. Click "Install Now" | 
+| 4. **IMPORTANT:** Check "Add Python to PATH" during installation |--|
+| 5. Click "Install Now" |--|
 
  **Linux (Ubuntu/Debian):** 
 Run this command:
@@ -186,10 +187,10 @@ cd Markdown-Magic
 
 | **Windows:** | **macOS:** | **Linux:** | 
 |--------------|------------|------------|
-1. Open File Explorer | 1. Open Finder | 1. Open your file manager | 
-2. Navigate to your Markdown-Magic folder | 2. Navigate to your Markdown-Magic folder | 2. Navigate to the Markdown-Magic folder | 
-3. Hold `Shift` and right-click in the folder | 3. Right-click the folder | 3. Right-click and select "Open in Terminal" | 
-4. Select "Open PowerShell window here" or "Open command window here" | 4. Select "Services" → "New Terminal at Folder" |  | 
+| 1. Open File Explorer | 1. Open Finder | 1. Open your file manager | 
+| 2. Navigate to your Markdown-Magic folder | 2. Navigate to your Markdown-Magic folder | 2. Navigate to the Markdown-Magic folder | 
+| 3. Hold `Shift` and right-click in the folder | 3. Right-click the folder | 3. Right-click and select "Open in Terminal" | 
+| 4. Select "Open PowerShell window here" or "Open command window here" | 4. Select "Services" → "New Terminal at Folder" |--| 
 
 ---
 
