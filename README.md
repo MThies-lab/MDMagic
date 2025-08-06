@@ -102,7 +102,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
 ### Development Dependencies
 |Library | Minimum Version (or Higher) | Description |
  |--------|---------|-------------------------------------|
- | py2app | 0.28.0 |  # macOS app packaging (macOS only) | 
+ | py2app | 0.28.0 |  macOS app packaging (macOS only) | 
 
 
 ---
