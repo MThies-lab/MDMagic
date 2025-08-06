@@ -85,23 +85,24 @@ Markdown Magic Transforms documents into modern, portable Markdown format for an
 ### 📦 Required Python Libraries
 
 #### **Core Feature Dependencies**
- |Library | Description |
- |-------------------------|--------------------------|
- | PyQt5>=5.15.0           |  # Desktop GUI framework | 
- | Pillow>=8.0.0           |  # Image processing | 
- | pytesseract>=0.3.7      |  # OCR text recognition | 
- | PyMuPDF>=1.18.0         |  # PDF processing | 
- | python-docx>=0.8.10     |  # Word document processing | 
- | beautifulsoup4>=4.9.0   |  # HTML parsing | 
- | striprtf>=0.0.15        |  # RTF document processing | 
- | openpyxl>=3.0.5         |  # Excel file processing | 
- | lxml>=4.6.0             |   # XML processing | 
- | tqdm>=4.60.0            |   # Progress bars | 
+ |Library | Minimum Version | Description |
+ |--------|-----------|--------------------------|
+ | PyQt5 | >=5.15.0        |  # Desktop GUI framework | 
+ | Pillow |>=8.0.0         |  # Image processing | 
+ | pytesseract | >=0.3.7      |  # OCR text recognition | 
+ | PyMuPDF | >=1.18.0         |  # PDF processing | 
+ | python-docx | >=0.8.10     |  # Word document processing | 
+ | beautifulsoup4 | >=4.9.0   |  # HTML parsing | 
+ | striprtf | >=0.0.15        |  # RTF document processing | 
+ | openpyxl | >=3.0.5         |  # Excel file processing | 
+ | lxml | >=4.6.0             |   # XML processing | 
+ | tqdm | >=4.60.0            |   # Progress bars | 
 
 
 ### **Development Dependencies**
- |-------------------------|-------------------------------------|
- | py2app>=0.28.0          |  # macOS app packaging (macOS only) | 
+|Library | Minimum Version | Description |
+ |--------|---------|-------------------------------------|
+ | py2app | >0.28.0 |  # macOS app packaging (macOS only) | 
 
 
 ---
@@ -194,7 +195,7 @@ cd Markdown-Magic
 
 ---
 
-### **Create a Virtual Environment**
+### Create a Virtual Environment
 
 Creat a virtual environment to keep your project dependencies separate from other Python projects. Run these commands in your respective terminal window for your OS.
 
@@ -232,9 +233,10 @@ pip3 install -r requirements.txt
 
 ---
 
-## **Test the Installation**
+## Test the Installation
 
-###**Run the desktop application:**
+###Run the desktop application
+
 There are multiple ways to launch Markdown Magic. If successful, the system displays a retro, nostalgic black screen with green fonts and outlines.
 
 1. Double click `markdown_magic_launcher.py` in your local repository. This launches the program.
@@ -271,11 +273,11 @@ python3 markdown_magic_gui.py
 - Make sure Python is installed and added to PATH
 - Try `python3` instead of `python` on macOS/Linux
 
-**Tesseract OCR not working:**
+**The Tesseract OCR does not work:**
 - Verify Tesseract installation path
 - Check that Tesseract is in your system PATH
 
-**GUI doesn't open:**
+**The desktop GUI does not open:**
 - Ensure PyQt5 is properly installed
 - Try: `pip install --upgrade PyQt5`
 
