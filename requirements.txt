@@ -9,3 +9,8 @@ openpyxl>=3.0.5
 lxml>=4.6.0
 tqdm>=4.60.0
 py2app>=0.28.0
+
+# AI Vision Dependencies (Optional - for enhanced image descriptions)
+transformers>=4.35.0
+torch>=2.0.0
+torchvision>=0.15.0

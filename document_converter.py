@@ -13,8 +13,8 @@ class DocumentConverter:
     Converts various document formats to Markdown with structure preservation
     """
     
-    def __init__(self, tesseract_path=None):
-        """Initialize the document converter"""
+    def __init__(self, tesseract_path=None, enable_ai=True):
+        """Initialize the document converter with AI features"""
         self.supported_formats = {
             '.txt': self._txt_to_md,
             '.pdf': self._pdf_to_md,
@@ -34,12 +34,16 @@ class DocumentConverter:
             '.tif': self._image_to_md
         }
         self.tesseract_path = tesseract_path
+        self.enable_ai = enable_ai
         
-        # Initialize image processor
+        # Initialize image processor with AI features
         try:
             from image_processor import ImageProcessor
-            self.image_processor = ImageProcessor(tesseract_path=tesseract_path)
-            print("MarkdownMagic Document Converter initialized with image processing")
+            self.image_processor = ImageProcessor(tesseract_path=tesseract_path, enable_ai=enable_ai)
+            if enable_ai:
+                print("MarkdownMagic Document Converter initialized with AI-powered image processing")
+            else:
+                print("MarkdownMagic Document Converter initialized with basic image processing")
         except ImportError:
             self.image_processor = None
             print("MarkdownMagic Document Converter initialized (image processing unavailable)")

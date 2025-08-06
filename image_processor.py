@@ -2,6 +2,7 @@
 """
 Image processing module for MarkdownMagic
 Handles image extraction, OCR, and markdown placeholder creation
+Enhanced with AI-powered image descriptions
 """
 
 import os
@@ -25,39 +26,58 @@ except ImportError:
     print("Warning: pytesseract not installed. OCR will be disabled.")
     print("Install with: pip install pytesseract")
 
+# Try to import AI vision processor
+try:
+    from ai_vision_processor import AIVisionProcessor
+    AI_VISION_AVAILABLE = True
+except ImportError:
+    AI_VISION_AVAILABLE = False
+
 class ImageProcessor:
     """Handles image extraction, processing, and OCR for document conversion"""
     
-    def __init__(self, tesseract_path=None):
-        """Initialize the image processor with optional Tesseract path"""
+    def __init__(self, tesseract_path=None, enable_ai=True):
+        """Initialize the image processor with optional Tesseract path and AI features"""
         self.tesseract_available = TESSERACT_AVAILABLE
         self.pil_available = PIL_AVAILABLE
         self.current_output_dir = None  # Track current output directory
         
-        # Set Tesseract path if provided
-        if tesseract_path and TESSERACT_AVAILABLE:
-            pytesseract.pytesseract.tesseract_cmd = tesseract_path
-            
-        # Test if Tesseract is working
-        if self.tesseract_available:
+        # Initialize AI vision processor if available
+        self.ai_processor = None
+        if AI_VISION_AVAILABLE and enable_ai:
             try:
-                # Try using subprocess to check Tesseract version
-                result = subprocess.run(['tesseract', '--version'], 
-                                       capture_output=True, text=True, check=False)
-                if result.returncode == 0:
-                    version = result.stdout.split('\n')[0]
-                    print(f"✓ Tesseract OCR available: {version}")
-                    self.tesseract_available = True
-                else:
-                    # Try using pytesseract
-                    version = pytesseract.get_tesseract_version()
-                    print(f"✓ Tesseract OCR available via pytesseract: {version}")
-                    self.tesseract_available = True
+                self.ai_processor = AIVisionProcessor(tesseract_path=tesseract_path, enable_ai=True)
+                print("✓ AI Vision processor initialized")
             except Exception as e:
-                print(f"Warning: Tesseract OCR not available: {e}")
-                self.tesseract_available = False
-        else:
-            print("Warning: Tesseract OCR not available: pytesseract not installed")
+                print(f"Warning: Could not initialize AI vision: {e}")
+                self.ai_processor = None
+        
+        # Fallback to basic OCR setup if AI not available
+        if self.ai_processor is None:
+            # Set Tesseract path if provided
+            if tesseract_path and TESSERACT_AVAILABLE:
+                pytesseract.pytesseract.tesseract_cmd = tesseract_path
+                
+            # Test if Tesseract is working
+            if self.tesseract_available:
+                try:
+                    # Try using subprocess to check Tesseract version
+                    result = subprocess.run(['tesseract', '--version'], 
+                                           capture_output=True, text=True, check=False)
+                    if result.returncode == 0:
+                        version = result.stdout.split('\n')[0]
+                        print(f"✓ Tesseract OCR available: {version}")
+                        self.tesseract_available = True
+                    else:
+                        # Try using pytesseract
+                        version = pytesseract.get_tesseract_version()
+                        print(f"✓ Tesseract OCR available via pytesseract: {version}")
+                        self.tesseract_available = True
+                except Exception as e:
+                    print(f"Warning: Tesseract OCR not available: {e}")
+                    self.tesseract_available = False
+            else:
+                print("Warning: Tesseract OCR not available: pytesseract not installed")
     
     def create_image_folder(self, output_file):
         """Create an image folder for the converted document"""
@@ -77,8 +97,16 @@ class ImageProcessor:
     
     def process_image(self, image_bytes, image_number, images_folder, position_info='', 
                      existing_alt='', existing_caption='', original_format='png'):
-        """Process an image: save without conversion, and generate OCR alt text"""
+        """Process an image: save and generate AI-enhanced alt text"""
         try:
+            # Use AI processor if available
+            if self.ai_processor is not None:
+                return self.ai_processor.process_image(
+                    image_bytes, image_number, images_folder, position_info,
+                    existing_alt, existing_caption, original_format
+                )
+            
+            # Fallback to basic processing
             if not self.pil_available:
                 raise ImportError("PIL/Pillow not installed - cannot process images")
                 
@@ -204,7 +232,12 @@ class ImageProcessor:
             return image_bytes  # Return original if conversion fails
     
     def process_image_file(self, image_file_path, output_file=None):
-        """Process a standalone image file and generate OCR text"""
+        """Process a standalone image file with AI-enhanced analysis"""
+        # Use AI processor if available
+        if self.ai_processor is not None:
+            return self.ai_processor.process_image_file(image_file_path, output_file)
+        
+        # Fallback to basic processing
         if not os.path.exists(image_file_path):
             raise FileNotFoundError(f"Image file not found: {image_file_path}")
         
