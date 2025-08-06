@@ -4,7 +4,7 @@
 
 Transform any document into beautiful, structured Markdown with advanced batch processing, OCR capabilities, and intelligent format preservation.
 
-Note: This project was created out of curiosity and necessity. At the time of this build, I would in no way refer to myself as a developer. I used Claude to write this program in Python 3, followed by a WHOLE LOT of google searches. That said, if you find something that's broken, or could be better, please let me know! I built this either before the Markitdown MCP was live or before I knew about it. 
+Note: This project was created out of curiosity and necessity. If you find something that's broken, or could be better, please let me know! I built this either before the Markitdown MCP was live or before I knew about it. 
 
 ![Version](https://img.shields.io/badge/version-1.0.0-green)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
