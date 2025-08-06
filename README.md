@@ -3,7 +3,7 @@
 
 Transform any document into beautiful, structured Markdown with advanced batch processing, OCR capabilities, and intelligent format preservation.
 
-Markdown Magic transforms documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features a desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is included in the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
+Markdown Magic converts documents into modern, portable Markdown format for any use case, and preserves document structure, formatting, and embedded content. It follows the official Markdown Guide style guide by Matt Cone and features a desktop GUI application and command line interface for embedded functionality. This program removes images from documents and places them in a separate cloned name folder, renaming the images in the order of their placement in the document. In the new markdown file, a placeholder for each image is generated in its place, clearly identifying which images belongs there. Additionally, the Tesseract OCR feature "reads" the image to generate a brief description of each image it scans, and is included in the image placeholder. This program supports drag and drop and standard file upload, as well as batch processing up to 250 mb. This program is completely free, completely local, and only has access to the folder the user designates to send the converted file to. 
 
 **Note:** This project was created out of curiosity and necessity. If you find something that's broken, or could be better, please let me know! I built this either before the Markitdown MCP was live or before I knew about it. 
 
@@ -85,24 +85,24 @@ Markdown Magic transforms documents into modern, portable Markdown format for an
 ###  Required Python Libraries
 
 #### **Core Feature Dependencies**
- |Library | Minimum Version | Description |
+ |Library | Minimum Version (or Higher) | Description |
  |--------|-----------|--------------------------|
- | PyQt5 | >=5.15.0        |  # Desktop GUI framework | 
- | Pillow |>=8.0.0         |  # Image processing | 
- | pytesseract | >=0.3.7      |  # OCR text recognition | 
- | PyMuPDF | >=1.18.0         |  # PDF processing | 
- | python-docx | >=0.8.10     |  # Word document processing | 
- | beautifulsoup4 | >=4.9.0   |  # HTML parsing | 
- | striprtf | >=0.0.15        |  # RTF document processing | 
- | openpyxl | >=3.0.5         |  # Excel file processing | 
- | lxml | >=4.6.0             |   # XML processing | 
- | tqdm | >=4.60.0            |   # Progress bars | 
+ | PyQt5 | 5.15.0        |  Desktop GUI framework | 
+ | Pillow | 8.0.0         |  Image processing | 
+ | pytesseract | 0.3.7      |  OCR text recognition | 
+ | PyMuPDF | 1.18.0         |  PDF processing | 
+ | python-docx | 0.8.10     |  Word document processing | 
+ | beautifulsoup4 | 4.9.0   |  HTML parsing | 
+ | striprtf | 0.0.15        |  RTF document processing | 
+ | openpyxl | 3.0.5         |  Excel file processing | 
+ | lxml | 4.6.0             |   XML processing | 
+ | tqdm | 4.60.0            |   Progress bars | 
 
 
-### **Development Dependencies**
-|Library | Minimum Version | Description |
+### Development Dependencies
+|Library | Minimum Version (or Higher) | Description |
  |--------|---------|-------------------------------------|
- | py2app | >0.28.0 |  # macOS app packaging (macOS only) | 
+ | py2app | 0.28.0 |  # macOS app packaging (macOS only) | 
 
 
 ---
@@ -129,7 +129,7 @@ If the system displays an error, you must install Python.
 |**Windows:** | **macOS:** |
 |-------------|------------|
 | 1. Go to `https://python.org/downloads`. | 1. Go to `https://python.org/downloads`. | 
-| 2. Click **Download Pytho** (latest version). | 2. Download the latest Python version. | 
+| 2. Click **Download Python** (latest version). | 2. Download the latest Python version. | 
 | 3. Run the downloaded file. | 3. Run the installer and follow prompts. | 
 | 4. **IMPORTANT:** Select **Add Python to PATH** on the install wizard screen. |--|
 | 5. Click *Install Now**. |--|
