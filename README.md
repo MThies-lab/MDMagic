@@ -111,7 +111,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
 
 ### Verify Python Installation
 
-Use these instructions to verify Python your respective OS:
+Use these instructions to verify that Python is installed in your OS:
 
  | **On Windows:**  | **On macOS:** | **On Linux:** |
  |------------------|---------------|---------------|
@@ -259,42 +259,42 @@ python3 markdown_magic_gui.py
 1. Create or select a document file. I recommend using a .pdf or .docx.
     a. This shows you immediately if it's working correctly, in comparison to a .txt file that doesn't have much, if any measurable formatting.
 2. In Markdown Magic, click **ADD FILES** or Drag and Drop into the file window. 
-7. Click **OUTPUT FOLDER**
-8. Select a folder destination for the converted file.
-9. Click **CONVERT**
-10. When the system prompts you if you want open your output folder, click **Yes**.
+3. Click **OUTPUT FOLDER**.
+4. Select a folder destination for the converted file.
+5. Click **CONVERT**.
+6. When the system prompts you if you want open your output folder, click **Yes**.
 
 
-##Troubleshooting
+## Troubleshooting
 
 ### **Common Issues**
 
 **"Command not found" error:**
-- Make sure Python is installed and added to PATH
-- Try `python3` instead of `python` on macOS/Linux
+- Make sure Python is installed and added to PATH.
+- Try `python3` instead of `python` on macOS/Linux.
 
 **The Tesseract OCR does not work:**
-- Verify Tesseract installation path
-- Check that Tesseract is in your system PATH
+- Verify Tesseract installation path.
+- Check that Tesseract is in your system PATH.
 
 **The desktop GUI does not open:**
-- Ensure PyQt5 is properly installed
-- Try: `pip install --upgrade PyQt5`
+- Ensure PyQt5 is properly installed.
+- Try: `pip install --upgrade PyQt5`.
 
 ### **Getting Help**
 - 📧 Create an issue on GitHub
-- 📖 Check the documentation in the `docs/` folder
-- 🤝 Contribute improvements via pull requests
+- 📖 Check the documentation in the `docs/` folder.
+- 🤝 Contribute improvements via pull requests.
 
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Tesseract OCR** - For optical character recognition
-- **PyQt5** - For the desktop GUI framework
-- **PyMuPDF** - For PDF processing capabilities
-- **All contributors** - For making this project better
+- **Tesseract OCR** - For optical character recognition.
+- **PyQt5** - For the desktop GUI framework.
+- **PyMuPDF** - For PDF processing capabilities.
+- **All contributors** - For making this project better.
 
 ---
 
