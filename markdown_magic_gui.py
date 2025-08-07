@@ -504,7 +504,7 @@ class MarkdownMagicWindow(QMainWindow):
         main_layout.addLayout(buttons1_layout)
         
         # Output folder display
-        self.output_folder_label = QLabel("Select an Output Folder")
+        self.output_folder_label = QLabel("You must select an Output Folder to continue")
         self.output_folder_label.setFont(QFont("Courier New", 10))
         self.output_folder_label.setAlignment(Qt.AlignCenter)
         self.output_folder_label.setObjectName("crt_button")
