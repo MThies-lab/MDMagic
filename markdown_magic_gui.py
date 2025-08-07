@@ -46,11 +46,12 @@ class ConversionWorker(QThread):
     file_completed = pyqtSignal(str, bool, str)  # filename, success, message
     conversion_finished = pyqtSignal(bool, str)  # success, output_folder
     
-    def __init__(self, files_to_convert, output_folder, tesseract_path=None):
+    def __init__(self, files_to_convert, output_folder, tesseract_path=None, enable_ai=True):
         super().__init__()
         self.files_to_convert = files_to_convert
         self.output_folder = output_folder
         self.tesseract_path = tesseract_path
+        self.enable_ai = enable_ai
         self.should_stop = False
     
     def run(self):
@@ -65,8 +66,8 @@ class ConversionWorker(QThread):
             if BATCH_PROCESSOR_AVAILABLE and CONVERTER_AVAILABLE:
                 self.status_update.emit(f"CONVERTING {len(self.files_to_convert)} FILES...")
                 
-                # Initialize converter with AI enabled
-                converter = DocumentConverter(self.tesseract_path, enable_ai=True)
+                # Initialize converter with AI setting
+                converter = DocumentConverter(self.tesseract_path, enable_ai=self.enable_ai)
                 
                 # Initialize batch processor
                 batch_processor = BatchProcessor()
@@ -477,6 +478,16 @@ class MarkdownMagicWindow(QMainWindow):
         # Spacing
         main_layout.addSpacing(10)
 
+        # AI Vision toggle
+        self.ai_vision_checkbox = QCheckBox("Enable to generate alt-text for images automatically during conversion. Disable to disregard auto-alt text and increase conversion speed. This feature is enabled by default.")
+        self.ai_vision_checkbox.setChecked(True)  # Default enabled
+        self.ai_vision_checkbox.setFont(QFont("Courier New", 10))
+        self.ai_vision_checkbox.setObjectName("ai_checkbox")
+        main_layout.addWidget(self.ai_vision_checkbox)
+        
+        # Spacing
+        main_layout.addSpacing(10)
+
         # Buttons Row 1: Add Files, Output Folder
         buttons1_layout = QHBoxLayout()
         
@@ -507,12 +518,6 @@ class MarkdownMagicWindow(QMainWindow):
         self.file_list.setObjectName("drag_drop_area")
         main_layout.addWidget(self.file_list)
         
-        # AI Vision toggle
-        self.ai_vision_checkbox = QCheckBox("Enable AI Vision (slower but detailed image descriptions)")
-        self.ai_vision_checkbox.setChecked(True)  # Default enabled
-        self.ai_vision_checkbox.setFont(QFont("Courier New", 11))
-        self.ai_vision_checkbox.setObjectName("ai_checkbox")
-        main_layout.addWidget(self.ai_vision_checkbox)
         
         # Buttons Row 2: Clear Files, Convert
         buttons2_layout = QHBoxLayout()
@@ -688,6 +693,31 @@ class MarkdownMagicWindow(QMainWindow):
                 border-top: 1px solid #00ff00;
             }
             
+            /* AI Vision Checkbox */
+            QCheckBox#ai_checkbox {
+                background-color: #000000;
+                color: #00ff00;
+                font-family: "Courier New";
+                font-size: 11px;
+                spacing: 5px;
+            }
+            
+            QCheckBox#ai_checkbox::indicator {
+                width: 18px;
+                height: 18px;
+                border: 2px solid #00ff00;
+                background-color: #000000;
+            }
+            
+            QCheckBox#ai_checkbox::indicator:checked {
+                background-color: #00ff00;
+                border: 2px solid #00ff00;
+            }
+            
+            QCheckBox#ai_checkbox::indicator:hover {
+                border: 2px solid #00ff88;
+            }
+            
             /* Central widget */
             QWidget {
                 background-color: #000000;
@@ -845,10 +875,12 @@ class MarkdownMagicWindow(QMainWindow):
         self.status_bar.showMessage("STARTING CONVERSION...")
         
         # Start worker thread
+        ai_enabled = self.ai_vision_checkbox.isChecked()
         self.conversion_worker = ConversionWorker(
             file_paths, 
             self.output_folder,
-            self.tesseract_path
+            self.tesseract_path,
+            ai_enabled
         )
         
         # Connect signals
