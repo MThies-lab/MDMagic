@@ -37,25 +37,7 @@ Markdown Magic converts documents into modern, portable Markdown format for any 
  | Progress Tracking |  Real-time conversion progress with detailed status | 
  | Error Handling | Robust error recovery and detailed reporting | 
  | Size Validation |  Intelligent file size limits (250MB batch limit) | 
- | **Hybrid Processing** |  **Combines OCR text extraction with AI visual analysis** |
-
-## Markdown Magic Vs MCP Markitdown
-
-| Feature | Markdown Magic | MCP Markitdown |
-|---------|----------------|----------------|
-| **Batch Processing** | ✅ Advanced batch with progress tracking | ❌ Single file only |
-| **OCR Support** | ✅ Multi-language OCR with Tesseract | ❌ No OCR capabilities |
-| ** AI Image Descriptions** | ✅ AI-powered visual content analysis | ❌ No AI capabilities |
-| **GUI Interface** | ✅ Full desktop interface | ❌ Command line only |
-| **Image Extraction** | ✅ Automatic image extraction/linking | ❌ Limited image support |
-| **Format Preservation** | ✅ Intelligent structure detection | ❌ Basic conversion |
-| **Error Recovery** | ✅ Robust error handling + retry | ❌ Basic error handling |
-| **Progress Tracking** | ✅ Real-time progress with ETA | ❌ No progress indication |
-| **File Size Limits** | ✅ Smart validation (250MB batches) | ❌ No size management |
-| **Web Interface** | ✅ Modern web app with drag-drop | ❌ No web interface |
-| **Multi-platform** | ✅ Windows, macOS, Linux  | ❌ Platform dependent |
-| **Settings Control** | ✅ Granular conversion settings | ❌ Limited customization |
-| **Smart Alt-Text** | ✅ **AI-generated meaningful descriptions** | ❌ **No alt-text generation** |
+ | Hybrid Processing |  Combines OCR text extraction with AI visual analysis |
 
 ---
 
